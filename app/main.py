@@ -4,12 +4,16 @@ from __future__ import annotations
 class Animal:
     alive = []
 
+    @classmethod
+    def create(cls, new: Animal) -> None:
+        Animal.alive.append(new)
+
     def __init__(self,
                  name: str, health: int = 100, hidden: bool = False) -> None:
         self.name = name
         self.health = health
         self.hidden = hidden
-        Animal.alive.append(self)
+        Animal.create(self)
 
     def __repr__(self) -> str:
         return (
@@ -21,10 +25,7 @@ class Animal:
 
 class Herbivore(Animal):
     def hide(self) -> None:
-        if not self.hidden:
-            self.hidden = True
-        else:
-            self.hidden = False
+        self.hidden = not self.hidden
 
 
 class Carnivore(Animal):
