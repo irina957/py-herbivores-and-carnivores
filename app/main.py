@@ -6,7 +6,8 @@ class Animal:
 
     @classmethod
     def create(cls, new: Animal) -> None:
-        Animal.alive.append(new)
+        if new.health > 0:
+            cls.alive.append(new)
 
     def __init__(self,
                  name: str, health: int = 100, hidden: bool = False) -> None:
